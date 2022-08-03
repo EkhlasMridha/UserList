@@ -17,10 +17,7 @@ export const AutoCompleteSearch = (props: AutoCompleteSearchProps) => {
   const onChange = (e: any) => {
     const inputData = e.currentTarget.value;
     setUserInput(inputData);
-    console.log("Auto source: ", props.sourceData);
-    console.log(inputData);
     if ((inputData ?? "") === "") {
-      console.log("Access");
       onSelectSuggestion(null);
       setSuggestion(props.sourceData);
       setShowSuggestion(false);
@@ -33,7 +30,6 @@ export const AutoCompleteSearch = (props: AutoCompleteSearchProps) => {
           item.login.username.toLowerCase().indexOf(userInput.toLowerCase()) >
             -1
       );
-      console.log("Searched: ", filteredData);
 
       setSuggestion(filteredData);
       setShowSuggestion(filteredData?.length > 0);
@@ -78,7 +74,6 @@ export const AutoCompleteSearch = (props: AutoCompleteSearchProps) => {
 
   let searchElement = document.getElementById("search-box");
   let bounding = searchElement?.getBoundingClientRect();
-  console.log(bounding?.bottom);
   return (
     <>
       <div className="flex flex-col relative">

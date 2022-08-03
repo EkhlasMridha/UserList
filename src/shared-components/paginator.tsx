@@ -30,7 +30,6 @@ export const Paginator = (props: PaginatorProps) => {
     setPage(pageNumber);
     props.onChange && props.onChange(pageNumber);
   };
-  console.log("Total: ", pagesCount);
   const disableClass = "bg-slate-200";
   const activeButtonHover = "bg-white hover:bg-gray-50";
   const activeClass = "z-10 bg-indigo-50 border-indigo-500 text-indigo-600";

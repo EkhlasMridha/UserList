@@ -42,7 +42,6 @@ export const Home = (props: any) => {
       .get<any>("https://randomuser.me/api/?results=50")
       .then((res) => res?.data)
       .then((res) => {
-        console.log(res);
         setData(res?.results);
         setFiltereData(res?.results);
         paginateUserData(res?.results, pageSize, 1);
@@ -73,7 +72,6 @@ export const Home = (props: any) => {
         : startIndex + pageSize;
 
     let paginatedData = filteredData.slice(startIndex, endIndex);
-    console.log(paginatedData);
     setPaginated({
       data: paginatedData,
       hasNext: endIndex < totalCount,
@@ -84,7 +82,6 @@ export const Home = (props: any) => {
   };
 
   const onChangePage = (pageNumber: number) => {
-    console.log("Gender: ", gender);
     paginateUserData(dataSource ?? [], pageSize, pageNumber, gender);
   };
 
@@ -94,8 +91,6 @@ export const Home = (props: any) => {
   };
 
   const filterByGender = (gender: any, data: any[]) => {
-    console.log("gender: ", gender);
-    console.log(data);
     let filtered = (data ?? []).filter(
       (item) => gender === "all" || item.gender === gender
     );
@@ -103,9 +98,7 @@ export const Home = (props: any) => {
   };
 
   const onSelectItem = (data: any) => {
-    console.log("Data: ", dataSource);
     let filtered = filterByGender(gender ?? "all", dataSource ?? []);
-    console.log("Filtered: ", filtered);
     if ((data ?? "") === "") {
       setFiltereData(dataSource);
       paginateUserData(dataSource, pageSize, 1, gender);
@@ -114,7 +107,6 @@ export const Home = (props: any) => {
     let searchResult = filtered.filter(
       (item) => item.login.uuid === data.login.uuid
     );
-    console.log(searchResult);
     paginateUserData(
       searchResult.length === 0 ? filtered : searchResult,
       pageSize,
@@ -134,7 +126,7 @@ export const Home = (props: any) => {
             onSelect={onSelectItem}
           />
           <div className="flex flex-row space-x-3 items-center">
-            <span className="font-medium">Filter by:</span>
+            <span className="text-sm text-slate-500">Filter by:</span>
             <div className="flex flex-row items-center space-x-1">
               <input
                 type={"radio"}
@@ -168,7 +160,9 @@ export const Home = (props: any) => {
           </div>
         </div>
         <div className="basis-1/2 flex justify-end items-center flex-row space-x-4">
-          <label className="font-medium text-sm">Tile View</label>
+          <label className="font-medium text-sm text-slate-500">
+            Tile View
+          </label>
           <Switch onClick={setTile} />
         </div>
       </div>
