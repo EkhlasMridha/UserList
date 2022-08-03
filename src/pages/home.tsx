@@ -5,6 +5,7 @@ import { Switch } from "../shared-components/switch.toggle";
 import { SearchIcon } from "@heroicons/react/outline";
 import { Paginator } from "../shared-components/paginator";
 import { AutoCompleteSearch } from "../shared-components/automplete-search";
+import { ListTile } from "../shared-components/list.tile";
 
 interface Filtered {
   source: any[];
@@ -27,6 +28,7 @@ export const Home = (props: any) => {
     hasPrevious: false,
   });
   const [filteredData, setFiltereData] = useState<any[]>([]);
+  const [isTile, setTile] = useState<boolean>();
   // let dataSource = useRef<any[]>();
   // let filteredSource = useRef<any[]>();
   const pageSize = 10;
@@ -167,10 +169,11 @@ export const Home = (props: any) => {
         </div>
         <div className="basis-1/2 flex justify-end items-center flex-row space-x-4">
           <label className="font-medium text-sm">Tile View</label>
-          <Switch />
+          <Switch onClick={setTile} />
         </div>
       </div>
-      <ListTable data={paginated?.data} />
+      {!isTile && <ListTable data={paginated?.data} />}
+      {isTile && <ListTile dataSource={paginated?.data} />}
       <div className="flex justify-end">
         {paginated?.data?.length !== 0 && (
           <Paginator
