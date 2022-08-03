@@ -34,8 +34,8 @@ export const ListTable = (props: ListTableProps) => {
           </thead>
           <tbody className="bg-white dark:bg-slate-800">
             {config?.data &&
-              config?.data?.map((item) => (
-                <tr>
+              config?.data?.map((item, index) => (
+                <tr key={index}>
                   <td className="border-b border-slate-100 p-4 pl-8 ">
                     <div className="flex flex-row">
                       <img

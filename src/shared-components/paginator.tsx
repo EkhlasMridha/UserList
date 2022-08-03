@@ -6,6 +6,7 @@ interface PaginatorProps {
   pageSize?: number;
   onChange?: (pageNumber: number) => void;
   defaultPage?: number;
+  page?: number;
 }
 
 export const Paginator = (props: PaginatorProps) => {
@@ -16,17 +17,20 @@ export const Paginator = (props: PaginatorProps) => {
   let pageSize = props.pageSize ?? 1;
   let total = props.totalCount ?? 0;
 
-  let pagesCount = total / pageSize;
+  useEffect(() => {
+    setPage(props.page ?? 1);
+  }, [props.page]);
+
+  let pagesCount = Math.ceil(total / pageSize);
   let pages = Array(pagesCount)
     .fill(0)
     .map((item, index) => index + 1);
-  console.log(pages);
 
   const changePage = (pageNumber: number) => {
     setPage(pageNumber);
     props.onChange && props.onChange(pageNumber);
   };
-
+  console.log("Total: ", pagesCount);
   const disableClass = "bg-slate-200";
   const activeButtonHover = "bg-white hover:bg-gray-50";
   const activeClass = "z-10 bg-indigo-50 border-indigo-500 text-indigo-600";
