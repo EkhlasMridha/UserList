@@ -63,13 +63,18 @@ export const Home = (props: any) => {
       startIndex + pageSize >= totalCount
         ? startIndex + pageSize - totalCount
         : startIndex + pageSize;
-    let paginatedData = data.slice(startIndex, endIndex);
-    console.log("Data confirm");
+    let paginatedData = data.slice(startIndex, endIndex - 1);
     setPaginated({
       data: paginatedData,
       hasNext: endIndex < totalCount,
       hasPrevious: startIndex !== 0,
+      totalCount: totalCount,
+      page: page,
     });
+  };
+
+  const onChangePage = (pageNumber: number) => {
+    paginateUserData(data?.data ?? [], pageSize, pageNumber);
   };
 
   return (
@@ -108,7 +113,13 @@ export const Home = (props: any) => {
       </div>
       <ListTable data={paginated?.data} />
       <div className="flex justify-end">
-        <Paginator />
+        {paginated?.data?.length !== 0 && (
+          <Paginator
+            totalCount={paginated?.totalCount}
+            pageSize={pageSize}
+            onChange={onChangePage}
+          />
+        )}
       </div>
     </div>
   );
