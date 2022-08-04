@@ -26,8 +26,7 @@ export const Home = (props: any) => {
   });
   const [filteredData, setFiltereData] = useState<any[]>([]);
   const [isTile, setTile] = useState<boolean>();
-  // let dataSource = useRef<any[]>();
-  // let filteredSource = useRef<any[]>();
+
   const pageSize = 10;
 
   useEffect(() => {
