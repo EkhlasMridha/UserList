@@ -112,8 +112,8 @@ export const Home = (props: any) => {
   return (
     <div className="p-20 pt-10">
       <h1 className="p-8 pt-0 pl-0 text-slate-500 text-2xl">User List</h1>
-      <div className="flex flex-row xs:flex-col items-start">
-        <div className="flex flex-row space-x-4 basis-2/4">
+      <div className="flex sm:flex-col md:flex-row lg:flex-row items-start">
+        <div className="flex sm:flex-col md:flex-col lg:flex-row space-x-4 basis-2/4">
           <AutoCompleteSearch
             sourceData={filteredData ?? []}
             onSelect={onSelectItem}
