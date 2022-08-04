@@ -16,8 +16,6 @@ interface Pagination {
   page: number;
   totalCount: number;
   data: any[];
-  hasNext: boolean;
-  hasPrevious: boolean;
 }
 
 export const Home = (props: any) => {
@@ -25,7 +23,6 @@ export const Home = (props: any) => {
   const [gender, setGender] = useState<"all" | "male" | "female">();
   const [paginated, setPaginated] = useState<Partial<Pagination>>({
     page: 1,
-    hasPrevious: false,
   });
   const [filteredData, setFiltereData] = useState<any[]>([]);
   const [isTile, setTile] = useState<boolean>();
@@ -62,7 +59,6 @@ export const Home = (props: any) => {
     if (startIndex >= totalCount) {
       setPaginated({
         ...paginated,
-        hasNext: false,
       });
       return;
     }
@@ -74,8 +70,6 @@ export const Home = (props: any) => {
     let paginatedData = filteredData.slice(startIndex, endIndex);
     setPaginated({
       data: paginatedData,
-      hasNext: endIndex < totalCount,
-      hasPrevious: startIndex !== 0,
       totalCount: totalCount,
       page: page,
     });
@@ -119,7 +113,7 @@ export const Home = (props: any) => {
   return (
     <div className="p-20 pt-10">
       <h1 className="p-8 pt-0 pl-0 text-slate-500 text-2xl">User List</h1>
-      <div className="flex flex-row">
+      <div className="flex flex-row xs:flex-col items-start">
         <div className="flex flex-row space-x-4 basis-2/4">
           <AutoCompleteSearch
             sourceData={filteredData ?? []}
